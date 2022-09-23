@@ -4,6 +4,7 @@ const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fet
 const usersControllers = require('./controllers/userController.js')
 const carsControllers = require('./controllers/carController.js')
 const authControllers = require('./controllers/authController.js')
+const checkRol = require('./middlewares/rol')
 const errorHandler = require('./middlewares/errorHandler.js')
 const bodyParser = require('body-parser')
 const auth = require('./middlewares/auth.js')
@@ -20,7 +21,7 @@ router.post('/signin',auth.auth,authControllers.signIn);
 router.post('/signup',authControllers.signUp);
 
 //USER
-router.get('/users',auth.auth,usersControllers.getUsers)
+router.get('/users',auth.auth,checkRol.checkRol,usersControllers.getUsers)
 router.get('/user/:id',usersControllers.getUser)
 router.post('/user',usersControllers.addUser)
 router.put('/user/:id',usersControllers.updateUser)
