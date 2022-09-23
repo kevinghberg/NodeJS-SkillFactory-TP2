@@ -1,4 +1,6 @@
 'use strict';
+
+const { DataTypes } = require("sequelize");
 const {
   Model
 } = require('sequelize');
@@ -11,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   Car.init({
     brand: DataTypes.STRING,
     speed: DataTypes.DOUBLE,
-    userId: DataTypes.INTEGER
+    userId: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Car',

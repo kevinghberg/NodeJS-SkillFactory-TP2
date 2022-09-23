@@ -12,7 +12,7 @@ const signIn = (req, res) => {
     User.findOne({
         where: {
             email: email
-        }
+        } 
     }).then(user => {
         if (!user) {
             res.status(404).json({ msg: "Usuario con este correo no encontrado" });
@@ -44,9 +44,10 @@ const signUp = (req, res) => {
 
     // Crear un usuario
     User.create({
-        name: req.body.name,
+        nombre: req.body.nombre,
         email: req.body.email,
-        password: hash
+        password: hash,
+        role: req.body.role
     }).then(user => {
 
         // Creamos el token

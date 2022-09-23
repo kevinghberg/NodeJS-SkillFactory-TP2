@@ -6,19 +6,21 @@ const carsControllers = require('./controllers/carController.js')
 const authControllers = require('./controllers/authController.js')
 const errorHandler = require('./middlewares/errorHandler.js')
 const bodyParser = require('body-parser')
+const auth = require('./middlewares/auth.js')
 
 
 
 router.use(express.json());
 router.use(express.urlencoded({extended: true}))
-router.use(bodyParser.json())
+
+
 //LOGIN REGISTER
 
-router.post('/signin',authControllers.signIn);
+router.post('/signin',auth.auth,authControllers.signIn);
 router.post('/signup',authControllers.signUp);
 
 //USER
-router.get('/users',usersControllers.getUsers)
+router.get('/users',auth.auth,usersControllers.getUsers)
 router.get('/user/:id',usersControllers.getUser)
 router.post('/user',usersControllers.addUser)
 router.put('/user/:id',usersControllers.updateUser)
