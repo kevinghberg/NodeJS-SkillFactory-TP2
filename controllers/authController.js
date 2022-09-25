@@ -12,7 +12,7 @@ const signIn = (req, res) => {
     User.findOne({
         where: {
             email: email
-        } 
+        }
     }).then(user => {
         if (!user) {
             res.status(404).json({ msg: "Usuario con este correo no encontrado" });
@@ -42,15 +42,12 @@ const signUp = (req, res) => {
     const salt = bcrypt.genSaltSync(Number.parseInt(authConfig.rounds));
     const hash = bcrypt.hashSync(req.body.password, salt);
 
-    // Crear un usuario
     User.create({
         nombre: req.body.nombre,
         email: req.body.email,
         password: hash,
         role: req.body.role
     }).then(user => {
-
-        // Creamos el token
         let token = jwt.sign({ user: user }, authConfig.secret, {
             expiresIn: authConfig.expires
         });
@@ -59,7 +56,6 @@ const signUp = (req, res) => {
             user: user,
             token: token
         });
-
     }).catch(err => {
         res.status(500).json(err);
     });

@@ -9,7 +9,6 @@ const checkRol = (req, res, next) => {
     else {
         next();
     }
-
 }
 
 module.exports = {

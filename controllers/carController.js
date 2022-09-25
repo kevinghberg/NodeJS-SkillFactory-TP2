@@ -1,46 +1,82 @@
 const db = require('../src/database/models/index.js');
-const { Car,User } = db;
+const { Car, User } = db;
 
-const addCar = (req, res, next) => {
-    Car.create(req.body)
-        .then(car => res.status(201).send('Car Created'))
-        .catch(err => next(err));
+const addCar = async (req, res, next) => {
+    try {
+        let { brand, speed, userId } = req.body;
+
+        await Car.create({
+            brand,
+            speed,
+            userId
+        });
+        res.status(201).json({ msg: "Car Created" })
+    } catch (err) {
+        return next(err);
+    }
 }
 
-const getCars = (req,res,next) => {
-    Car.findAll({include : User})
-       .then(cars => res.status(200).send(cars))
-       .catch(err => next(err))
-}
 
-const getCar = (req,res,next) => {
-    const id = req.params.id;
-    Car.findOne({where : {id}, include: User})
-       .then(car => res.status(200).send(car))
-       .catch(err => next(err))
-}
+const getCars = async (req, res, next) => {
+    try {
+        let cars = await Car.findAll({ include: User });
 
-const updateCar = (req, res, next) => {
-    Car.update({
-        brand: req.body.brand,
-        speed: req.body.speed,
-        userId: req.body.userId
-    }, {
-        where: {
-            id: req.params.id
+        if (cars.length === 0) {
+            res.status(400).json({ msg: "No cars founded" })
+        } else {
+            res.status(200).json(cars);
         }
-    })
-        .then(car => res.status(200).send(car))
-        .catch(err => next(err));
-};
+        console.log(cars);
+    } catch (err) {
+        return next(err);
+    }
+}
 
-const deleteCar = (req, res, next) => {
-    Car.destroy({
-        where: {
-            id: req.params.id
+const getCar = async (req, res, next) => {
+    try {
+        let id = req.params.id;
+        let car = await Car.findOne({ where: { id }, include: User })
+        if (car === null) {
+            res.status(400).send("Not Found");
+        } else {
+            res.status(201).json(car);
         }
-    }).then(car => res.sendStatus(200).send(car))
-        .catch(err => next(err));
+    } catch (err) {
+        return next(err)
+    }
+}
+
+const updateCar = async (req, res, next) => {
+    try {
+        let id = req.params.id
+        let { brand, speed, userId } = req.body;
+        await Car.update({
+            brand,
+            speed,
+            userId
+        }, {
+            where: { id }
+        })
+        res.status(200).json({ msg: `Car ${id} updated` })
+    } catch (err) {
+        return next(err);
+    }
+}
+
+const deleteCar = async (req, res, next) => {
+    try {
+        let id = req.params.id;
+
+        await Car.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+        res.status(200).json({ msg: `Car ${id} deleted` })
+    } catch (err) {
+        return next(err);
+    }
+
 };
 
 module.exports = {

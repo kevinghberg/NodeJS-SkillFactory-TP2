@@ -9,33 +9,28 @@ const errorHandler = require('./middlewares/errorHandler.js')
 const bodyParser = require('body-parser')
 const auth = require('./middlewares/auth.js')
 
-
-
 router.use(express.json());
 router.use(express.urlencoded({extended: true}))
 
-
 //LOGIN REGISTER
 
-router.post('/signin',auth.auth,authControllers.signIn);
+router.post('/signin',authControllers.signIn);
 router.post('/signup',authControllers.signUp);
 
 //USER
 router.get('/users',auth.auth,checkRol.checkRol,usersControllers.getUsers)
-router.get('/user/:id',usersControllers.getUser)
+router.get('/user/:id',auth.auth,usersControllers.getUser)
 router.post('/user',usersControllers.addUser)
-router.put('/user/:id',usersControllers.updateUser)
-router.delete('/user/:id',usersControllers.deleteUser)
+router.put('/user/:id',auth.auth,usersControllers.updateUser)
+router.delete('/user/:id',auth.auth,usersControllers.deleteUser)
 
 //CARS
-router.get('/cars',carsControllers.getCars)
-router.get('/car/:id',carsControllers.getCar)
-router.post('/car',carsControllers.addCar)
-router.put('/car/:id',carsControllers.updateCar)
-router.delete('/car/:id',carsControllers.deleteCar)
+router.get('/cars',auth.auth,carsControllers.getCars)
+router.get('/car/:id',auth.auth,carsControllers.getCar)
+router.post('/car',auth.auth,carsControllers.addCar)
+router.put('/car/:id',auth.auth,carsControllers.updateCar)
+router.delete('/car/:id',auth.auth,carsControllers.deleteCar)
 
-router.use(errorHandler.notFound);
-
-
+router.use(errorHandler.errorParser);
 
 module.exports = router;
