@@ -1,8 +1,8 @@
-:books: NodeJS-SkillFactory-TP2 :books:
+##:books: NodeJS-SkillFactory-TP2 :books:
 
-:bulb:Proyecto realizado por **Kevin Garces Hoyberg**
+##:bulb:Proyecto realizado por **Kevin Garces Hoyberg**
 
-🛠️Built with🛠️
+##🛠️Built with🛠️
 
 :zap:**NodeJS** - Asynchronous event driven JavaScript runtime environment.\
 :zap:**Express** - The framework used.\
