@@ -1,6 +1,6 @@
 ## :books: NodeJS-SkillFactory-TP2 :books:
 
-## :bulb: ** Author **
+## :bulb: **Author**
 Kevin Garces Hoyberg
 
 ## 🛠️Built with🛠️
