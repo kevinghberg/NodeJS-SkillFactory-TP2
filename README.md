@@ -10,5 +10,5 @@ Kevin Garces Hoyberg
 :zap:**Sequelize** - ORM.\
 :zap:**Visual Studio Code** - Code Editor Developed.\
 :zap:**Post-Man** - API platform for developers to design, build, test, and iterate on their APIs.\
-:zap:**MySQL** - relational database management system
+:zap:**MySQL** - relational database management system\
 :zap:**DBeaver** -  Multi-Platform & Open Source Database Management Tool.
