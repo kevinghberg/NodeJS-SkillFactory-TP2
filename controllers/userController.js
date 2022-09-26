@@ -1,6 +1,7 @@
 const e = require('express');
 const db = require('../src/database/models/index.js');
 const { User, Car } = db;
+const bcrypt = require("bcrypt");
 
 const addUser = async (req, res, next) => {
     try {
