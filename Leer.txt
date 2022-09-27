@@ -1,0 +1,1 @@
+La encriptacion de password se hace al momento del registro ( singUp() ) y no al añadir un usuario con addUser().
