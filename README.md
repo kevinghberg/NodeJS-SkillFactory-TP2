@@ -12,3 +12,5 @@ Kevin Garces Høyberg
 :zap:**Post-Man** - API platform for developers to design, build, test, and iterate on their APIs.\
 :zap:**MySQL** - Relational database management system.\
 :zap:**DBeaver** -  Multi-Platform & Open Source Database Management Tool.
+:zap:**JsonWebToken** - Packague for Authorization.\
+:zap:**Bcrypt** -  Packague for Password Hashing Function.
